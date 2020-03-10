@@ -18,15 +18,29 @@ import retrofit2.Response;
 public class MovieModel extends ViewModel {
 
     private MovieRepo movieRepo = new MovieRepoImpl();
-    private MutableLiveData<List<MovieItem>> movieItemLiveData = new MutableLiveData<>();
 
-    public LiveData<List<MovieItem>> movieItemLiveData() {
-        return movieItemLiveData;
+    private MutableLiveData<List<MovieItem>> firstMovieItemLiveData = new MutableLiveData<>();
+
+    public LiveData<List<MovieItem>> firstMovieItemLiveData() {
+        return firstMovieItemLiveData;
     }
 
-    public void getMovies(String sorting) {
+    private MutableLiveData<List<MovieItem>> secondMovieItemLiveData = new MutableLiveData<>();
 
-        movieRepo.getMovieWithId(sorting)
+    public LiveData<List<MovieItem>> secondMovieItemLiveData() {
+        return secondMovieItemLiveData;
+    }
+
+    private MutableLiveData<List<MovieItem>> thirdMovieItemLiveData = new MutableLiveData<>();
+
+    public LiveData<List<MovieItem>> thirdMovieItemLiveData() {
+        return thirdMovieItemLiveData;
+    }
+
+
+    public void getMovies(String firstSorting, String secondSorting, String thirdSorting) {
+
+        movieRepo.getMovieWithId(firstSorting)
                 .enqueue(new Callback<MovieList>() {
                     @Override
                     public void onResponse(Call<MovieList> call, Response<MovieList> response) {
@@ -44,7 +58,8 @@ public class MovieModel extends ViewModel {
                                     result.getPosterPath()));
 
                         }
-                        movieItemLiveData.setValue(movieItems);
+
+                        firstMovieItemLiveData.setValue(movieItems);
                     }
 
                     @Override
@@ -52,6 +67,63 @@ public class MovieModel extends ViewModel {
 
                     }
                 });
+
+        movieRepo.getMovieWithId(secondSorting)
+                .enqueue(new Callback<MovieList>() {
+                    @Override
+                    public void onResponse(Call<MovieList> call, Response<MovieList> response) {
+                        MovieList movieList = response.body();
+
+                        List<MovieItem> movieItems = new ArrayList<MovieItem>();
+
+                        for (int i = 0; i < movieList.getResults().size(); i++) {
+
+                            Result result = movieList.getResults().get(i);
+
+                            movieItems.add(new MovieItem(result.getTitle(),
+                                    result.getReleaseDate(),
+                                    result.getVoteAverage(),
+                                    result.getPosterPath()));
+
+                        }
+
+                        secondMovieItemLiveData.setValue(movieItems);
+                    }
+
+                    @Override
+                    public void onFailure(Call<MovieList> call, Throwable t) {
+
+                    }
+                });
+
+        movieRepo.getMovieWithId(thirdSorting)
+                .enqueue(new Callback<MovieList>() {
+                    @Override
+                    public void onResponse(Call<MovieList> call, Response<MovieList> response) {
+                        MovieList movieList = response.body();
+
+                        List<MovieItem> movieItems = new ArrayList<MovieItem>();
+
+                        for (int i = 0; i < movieList.getResults().size(); i++) {
+
+                            Result result = movieList.getResults().get(i);
+
+                            movieItems.add(new MovieItem(result.getTitle(),
+                                    result.getReleaseDate(),
+                                    result.getVoteAverage(),
+                                    result.getPosterPath()));
+
+                        }
+
+                        thirdMovieItemLiveData.setValue(movieItems);
+                    }
+
+                    @Override
+                    public void onFailure(Call<MovieList> call, Throwable t) {
+
+                    }
+                });
+
 
     }
 
