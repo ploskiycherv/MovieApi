@@ -2,13 +2,14 @@ package com.example.movieapi.model;
 
 public class MovieItem {
 
-    private String title, year, rating, posterUrl;
+    private String title, year, rating, posterUrl, id;
 
-    public MovieItem(String title, String year, String rating, String posterUrl) {
+    public MovieItem(String title, String year, String rating, String posterUrl, String id) {
         this.title = title;
         this.year = year;
         this.rating = rating;
         this.posterUrl = posterUrl;
+        this.id = id;
     }
 
     public String getTitle() {
@@ -41,5 +42,13 @@ public class MovieItem {
 
     public void setPosterUrl(String posterUrl) {
         this.posterUrl = posterUrl;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

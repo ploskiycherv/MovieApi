@@ -55,7 +55,8 @@ public class MovieModel extends ViewModel {
                             movieItems.add(new MovieItem(result.getTitle(),
                                     result.getReleaseDate(),
                                     result.getVoteAverage(),
-                                    result.getPosterPath()));
+                                    result.getPosterPath(),
+                                    result.getId()));
 
                         }
 
@@ -83,7 +84,8 @@ public class MovieModel extends ViewModel {
                             movieItems.add(new MovieItem(result.getTitle(),
                                     result.getReleaseDate(),
                                     result.getVoteAverage(),
-                                    result.getPosterPath()));
+                                    result.getPosterPath(),
+                                    result.getId()));
 
                         }
 
@@ -111,7 +113,8 @@ public class MovieModel extends ViewModel {
                             movieItems.add(new MovieItem(result.getTitle(),
                                     result.getReleaseDate(),
                                     result.getVoteAverage(),
-                                    result.getPosterPath()));
+                                    result.getPosterPath(),
+                                    result.getId()));
 
                         }
 

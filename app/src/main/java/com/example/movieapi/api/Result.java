@@ -21,7 +21,7 @@ public class Result {
     private String posterPath;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private String id;
     @SerializedName("adult")
     @Expose
     private Boolean adult;
@@ -82,11 +82,11 @@ public class Result {
         this.posterPath = posterPath;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
