@@ -1,5 +1,7 @@
 package com.example.movieapi.data;
 
+import android.view.View;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -40,6 +42,13 @@ public class MovieModel extends ViewModel {
 
     public void getMovies(String firstSorting, String secondSorting, String thirdSorting) {
 
+        getListMovie(firstSorting, firstMovieItemLiveData);
+        getListMovie(secondSorting, secondMovieItemLiveData);
+        getListMovie(thirdSorting, thirdMovieItemLiveData);
+
+    }
+
+    private void getListMovie(String firstSorting, MutableLiveData<List<MovieItem>> movieItemLiveData) {
         movieRepo.getMovieWithId(firstSorting)
                 .enqueue(new Callback<MovieList>() {
                     @Override
@@ -60,7 +69,7 @@ public class MovieModel extends ViewModel {
 
                         }
 
-                        firstMovieItemLiveData.setValue(movieItems);
+                        movieItemLiveData.setValue(movieItems);
                     }
 
                     @Override
@@ -68,66 +77,6 @@ public class MovieModel extends ViewModel {
 
                     }
                 });
-
-        movieRepo.getMovieWithId(secondSorting)
-                .enqueue(new Callback<MovieList>() {
-                    @Override
-                    public void onResponse(Call<MovieList> call, Response<MovieList> response) {
-                        MovieList movieList = response.body();
-
-                        List<MovieItem> movieItems = new ArrayList<MovieItem>();
-
-                        for (int i = 0; i < movieList.getResults().size(); i++) {
-
-                            Result result = movieList.getResults().get(i);
-
-                            movieItems.add(new MovieItem(result.getTitle(),
-                                    result.getReleaseDate(),
-                                    result.getVoteAverage(),
-                                    result.getPosterPath(),
-                                    result.getId()));
-
-                        }
-
-                        secondMovieItemLiveData.setValue(movieItems);
-                    }
-
-                    @Override
-                    public void onFailure(Call<MovieList> call, Throwable t) {
-
-                    }
-                });
-
-        movieRepo.getMovieWithId(thirdSorting)
-                .enqueue(new Callback<MovieList>() {
-                    @Override
-                    public void onResponse(Call<MovieList> call, Response<MovieList> response) {
-                        MovieList movieList = response.body();
-
-                        List<MovieItem> movieItems = new ArrayList<MovieItem>();
-
-                        for (int i = 0; i < movieList.getResults().size(); i++) {
-
-                            Result result = movieList.getResults().get(i);
-
-                            movieItems.add(new MovieItem(result.getTitle(),
-                                    result.getReleaseDate(),
-                                    result.getVoteAverage(),
-                                    result.getPosterPath(),
-                                    result.getId()));
-
-                        }
-
-                        thirdMovieItemLiveData.setValue(movieItems);
-                    }
-
-                    @Override
-                    public void onFailure(Call<MovieList> call, Throwable t) {
-
-                    }
-                });
-
-
     }
 
 
