@@ -22,56 +22,11 @@ import com.example.movieapi.model.MovieItem;
 
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MainMovieListFragment#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
 public class MainMovieListFragment extends Fragment {
 
     RecyclerView firstRecyclerView, secondRecyclerView, thirdRecyclerView;
     String firstSorting, secondSorting, thirdSorting;
     TextView firstTextView, secondTextView, thirdTextView;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MainMovieListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MainMovieListFragment newInstance(String param1, String param2) {
-        MainMovieListFragment fragment = new MainMovieListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-    public MainMovieListFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,13 +34,13 @@ public class MainMovieListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_main_movie_list, container, false);
 
-        firstRecyclerView = getView().findViewById(R.id.firstRecyclerView);
-        secondRecyclerView = getView().findViewById(R.id.secondRecyclerView);
-        thirdRecyclerView = getView().findViewById(R.id.thirdRecyclerView);
+        firstRecyclerView = view.findViewById(R.id.firstRecyclerView);
+        secondRecyclerView = view.findViewById(R.id.secondRecyclerView);
+        thirdRecyclerView = view.findViewById(R.id.thirdRecyclerView);
 
-        firstTextView = getView().findViewById(R.id.firstTextView);
-        secondTextView = getView().findViewById(R.id.secondTextView);
-        thirdTextView = getView().findViewById(R.id.thirdTextView);
+        firstTextView = view.findViewById(R.id.firstTextView);
+        secondTextView = view.findViewById(R.id.secondTextView);
+        thirdTextView = view.findViewById(R.id.thirdTextView);
 
         firstSorting = "popular";
         secondSorting = "top_rated";
