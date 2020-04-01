@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <FrameLayout
-        android:id="@+id/main_movie_list_container"
+        android:id="@+id/main_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

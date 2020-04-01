@@ -32,7 +32,7 @@ public class MainMovieListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_main_movie_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_main_movie_list, null);
 
         firstRecyclerView = view.findViewById(R.id.firstRecyclerView);
         secondRecyclerView = view.findViewById(R.id.secondRecyclerView);
