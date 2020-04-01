@@ -18,9 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().addToBackStack(null);
 
-        MainMovieListFragment mainMovieListFragment = new MainMovieListFragment(fragmentTransaction);
-
-        fragmentTransaction.replace(R.id.main_container, mainMovieListFragment);
+        fragmentTransaction.replace(R.id.main_container, new MainMovieListFragment());
 
         fragmentTransaction.commit();
 

@@ -11,6 +11,5 @@ public class MovieRepoImpl implements MovieRepo {
         return  NetworkService.getInstance()
                 .getAPIService()
                 .getMovieWithId(sorting, "fd81cebf8e9f74660ab0ba29bfce449f", "en-US", 1);
-
     }
 }

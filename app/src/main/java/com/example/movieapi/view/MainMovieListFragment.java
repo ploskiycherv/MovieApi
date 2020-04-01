@@ -28,11 +28,6 @@ public class MainMovieListFragment extends Fragment {
     RecyclerView firstRecyclerView, secondRecyclerView, thirdRecyclerView;
     String firstSorting, secondSorting, thirdSorting;
     TextView firstTextView, secondTextView, thirdTextView;
-    FragmentTransaction fragmentTransaction;
-
-    public MainMovieListFragment(FragmentTransaction fragmentTransaction) {
-        this.fragmentTransaction = fragmentTransaction;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -103,8 +98,11 @@ public class MainMovieListFragment extends Fragment {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            fragmentTransaction.replace(R.id.main_container, new DescriptionMovieFragment());
-        }
-    };
 
+            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.main_container, new DescriptionMovieFragment());
+            fragmentTransaction.commit();
+        }
+
+    };
 }

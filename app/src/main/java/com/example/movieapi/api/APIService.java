@@ -14,4 +14,11 @@ public interface APIService {
             @Query("language") String language,
             @Query("page") int page
     );
+
+    @GET("/3/movie/{id}/")
+    Call<MovieList> getDescriptionWithId(
+            @Path("id") String sorting,
+            @Query("api_key") String apiKey,
+            @Query("language") String language
+    );
 }

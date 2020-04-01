@@ -13,6 +13,7 @@ import com.example.movieapi.model.MovieItem;
 import com.squareup.picasso.Picasso;
 
 public class MovieItemAdapter extends ListAdapter<MovieItem, MovieItemViewHolder> {
+
     View.OnClickListener onClickListener;
 
     public MovieItemAdapter(@NonNull DiffUtil.ItemCallback<MovieItem> diffCallback, View.OnClickListener onClickListener) {
