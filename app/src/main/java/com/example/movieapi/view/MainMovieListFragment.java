@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +28,11 @@ public class MainMovieListFragment extends Fragment {
     RecyclerView firstRecyclerView, secondRecyclerView, thirdRecyclerView;
     String firstSorting, secondSorting, thirdSorting;
     TextView firstTextView, secondTextView, thirdTextView;
+    FragmentTransaction fragmentTransaction;
+
+    public MainMovieListFragment(FragmentTransaction fragmentTransaction) {
+        this.fragmentTransaction = fragmentTransaction;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,9 +56,9 @@ public class MainMovieListFragment extends Fragment {
         secondTextView.setText(secondSorting.replace("_", " "));
         thirdTextView.setText(thirdSorting.replace("_", " "));
 
-        final MovieItemAdapter firstMovieItemAdapter = new MovieItemAdapter(new MovieItemDiffUtil());
-        MovieItemAdapter secondMovieItemAdapter = new MovieItemAdapter(new MovieItemDiffUtil());
-        MovieItemAdapter thirdMovieItemAdapter = new MovieItemAdapter(new MovieItemDiffUtil());
+        MovieItemAdapter firstMovieItemAdapter = new MovieItemAdapter(new MovieItemDiffUtil(), onClickListener);
+        MovieItemAdapter secondMovieItemAdapter = new MovieItemAdapter(new MovieItemDiffUtil(), onClickListener);
+        MovieItemAdapter thirdMovieItemAdapter = new MovieItemAdapter(new MovieItemDiffUtil(), onClickListener);
 
         LinearLayoutManager firstLinearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         LinearLayoutManager secondLinearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
@@ -93,4 +99,12 @@ public class MainMovieListFragment extends Fragment {
 
         return view;
     }
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            fragmentTransaction.replace(R.id.main_container, new DescriptionMovieFragment());
+        }
+    };
+
 }

@@ -13,9 +13,11 @@ import com.example.movieapi.model.MovieItem;
 import com.squareup.picasso.Picasso;
 
 public class MovieItemAdapter extends ListAdapter<MovieItem, MovieItemViewHolder> {
+    View.OnClickListener onClickListener;
 
-    public MovieItemAdapter(@NonNull DiffUtil.ItemCallback<MovieItem> diffCallback) {
+    public MovieItemAdapter(@NonNull DiffUtil.ItemCallback<MovieItem> diffCallback, View.OnClickListener onClickListener) {
         super(diffCallback);
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
@@ -38,6 +40,8 @@ public class MovieItemAdapter extends ListAdapter<MovieItem, MovieItemViewHolder
 
         String posterUrl = "https://image.tmdb.org/t/p/w500" + movieItem.getPosterUrl();
         Picasso.get().load(posterUrl).into(holder.posterImageView);
+
+        holder.itemCardView.setOnClickListener(onClickListener);
 
     }
 }
