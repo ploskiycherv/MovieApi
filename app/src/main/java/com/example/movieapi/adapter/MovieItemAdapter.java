@@ -9,14 +9,15 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
 import com.example.movieapi.R;
+import com.example.movieapi.data.OnItemClick;
 import com.example.movieapi.model.MovieItem;
 import com.squareup.picasso.Picasso;
 
 public class MovieItemAdapter extends ListAdapter<MovieItem, MovieItemViewHolder> {
 
-    View.OnClickListener onClickListener;
+    OnItemClick onClickListener;
 
-    public MovieItemAdapter(@NonNull DiffUtil.ItemCallback<MovieItem> diffCallback, View.OnClickListener onClickListener) {
+    public MovieItemAdapter(@NonNull DiffUtil.ItemCallback<MovieItem> diffCallback, OnItemClick onClickListener) {
         super(diffCallback);
         this.onClickListener = onClickListener;
     }
@@ -42,7 +43,12 @@ public class MovieItemAdapter extends ListAdapter<MovieItem, MovieItemViewHolder
         String posterUrl = "https://image.tmdb.org/t/p/w500" + movieItem.getPosterUrl();
         Picasso.get().load(posterUrl).into(holder.posterImageView);
 
-        holder.itemCardView.setOnClickListener(onClickListener);
+        holder.itemCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickListener.onClick(movieItem.getId());
+            }
+        });
 
     }
 }

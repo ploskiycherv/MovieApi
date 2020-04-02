@@ -19,9 +19,12 @@ import com.example.movieapi.R;
 import com.example.movieapi.adapter.MovieItemAdapter;
 import com.example.movieapi.adapter.MovieItemDiffUtil;
 import com.example.movieapi.data.MovieModel;
+import com.example.movieapi.data.OnItemClick;
 import com.example.movieapi.model.MovieItem;
 
 import java.util.List;
+
+import static android.provider.Contacts.SettingsColumns.KEY;
 
 public class MainMovieListFragment extends Fragment {
 
@@ -95,14 +98,21 @@ public class MainMovieListFragment extends Fragment {
         return view;
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+    OnItemClick onClickListener = new OnItemClick() {
 
-            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.main_container, new DescriptionMovieFragment());
-            fragmentTransaction.commit();
-        }
+    @Override
+    public void onClick(String id) {
 
-    };
+        Bundle bundle = new Bundle();
+        bundle.putString("ID", id);
+
+        Fragment fragment = new DescriptionMovieFragment();
+        fragment.setArguments(bundle);
+
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_container, fragment);
+        fragmentTransaction.commit();
+    }
+
+};
 }

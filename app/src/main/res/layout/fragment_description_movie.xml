@@ -9,72 +9,66 @@
 
 
     <ImageView
-        android:id="@+id/backdropPathImageView"
+        android:id="@+id/backdropPathDescriptionImageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/posterImageView"
+        android:id="@+id/posterDescriptionImageView"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="90dp"
         android:adjustViewBounds="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/backdropPathImageView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/ratingTextView"
+        android:id="@+id/ratingDescriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/rounded_corner"
-        app:layout_constraintEnd_toEndOf="@+id/posterImageView"
-        app:layout_constraintTop_toTopOf="@+id/posterImageView" />
+        app:layout_constraintEnd_toEndOf="@+id/posterDescriptionImageView"
+        app:layout_constraintTop_toTopOf="@+id/posterDescriptionImageView" />
 
     <TextView
-        android:id="@+id/titleTextView"
+        android:id="@+id/titleDescriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
         android:background="@color/colorBackgroundItem"
-        android:gravity="center"
         android:textColor="@color/colorText"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/posterImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/posterDescriptionImageView" />
 
     <TextView
-        android:id="@+id/yearTextView"
+        android:id="@+id/yearDescriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:textColor="@color/colorText"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/posterImageView"
-        app:layout_constraintTop_toBottomOf="@+id/backdropPathImageView" />
+        app:layout_constraintStart_toEndOf="@+id/posterDescriptionImageView"
+        app:layout_constraintTop_toBottomOf="@+id/backdropPathDescriptionImageView" />
 
     <TextView
-        android:id="@+id/descriptionTextView"
+        android:id="@+id/descriptionDescriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:background="@color/colorBackgroundRV"
         android:textColor="@color/colorText"
-        android:textSize="30sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/titleDescriptionTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

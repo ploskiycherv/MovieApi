@@ -1,5 +1,7 @@
 package com.example.movieapi.api;
 
+import com.example.movieapi.model.MovieDescription;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -15,9 +17,9 @@ public interface APIService {
             @Query("page") int page
     );
 
-    @GET("/3/movie/{id}/")
-    Call<MovieList> getDescriptionWithId(
-            @Path("id") String sorting,
+    @GET("/3/movie/{id}")
+    Call<Description> getDescriptionWithId(
+            @Path("id") String id,
             @Query("api_key") String apiKey,
             @Query("language") String language
     );
