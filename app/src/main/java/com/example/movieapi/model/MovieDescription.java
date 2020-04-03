@@ -2,9 +2,9 @@ package com.example.movieapi.model;
 
 public class MovieDescription {
 
-    private String title, year, rating, posterUrl, backdropPathUrl, id, description;
+    private String title, year, rating, posterUrl, backdropPathUrl, id, description, runtime;
 
-    public MovieDescription(String title, String year, String rating, String posterUrl, String backdropPathUrl, String id, String description) {
+    public MovieDescription(String title, String year, String rating, String posterUrl, String backdropPathUrl, String id, String description, String runtime) {
         this.title = title;
         this.year = year;
         this.rating = rating;
@@ -12,6 +12,7 @@ public class MovieDescription {
         this.backdropPathUrl = backdropPathUrl;
         this.id = id;
         this.description = description;
+        this.runtime = runtime;
     }
 
     public String getTitle() {

@@ -32,9 +32,10 @@
         android:id="@+id/ratingDescriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
         android:background="@drawable/rounded_corner"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="@+id/posterDescriptionImageView"
         app:layout_constraintTop_toTopOf="@+id/posterDescriptionImageView" />
 
@@ -42,7 +43,6 @@
         android:id="@+id/titleDescriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBackgroundItem"
         android:textColor="@color/colorText"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -54,17 +54,30 @@
         android:id="@+id/yearDescriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:textColor="@color/colorText"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/titleDescriptionTextView"
         app:layout_constraintStart_toEndOf="@+id/posterDescriptionImageView"
         app:layout_constraintTop_toBottomOf="@+id/backdropPathDescriptionImageView" />
+
+    <TextView
+        android:id="@+id/runtimeDescriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:textColor="@color/colorText"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/titleDescriptionTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/yearDescriptionTextView"
+        app:layout_constraintTop_toBottomOf="@+id/backdropPathDescriptionImageView" />
+
 
     <TextView
         android:id="@+id/descriptionDescriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBackgroundRV"
         android:textColor="@color/colorText"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

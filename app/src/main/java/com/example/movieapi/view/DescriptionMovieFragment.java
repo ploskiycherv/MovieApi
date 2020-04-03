@@ -36,7 +36,7 @@ public class DescriptionMovieFragment extends Fragment {
 
         String id = bundle.getString("ID");
 
-        TextView ratingTextView, titleTextView, yearTextView, descriptionTextView;
+        TextView ratingTextView, titleTextView, yearTextView, descriptionTextView, runtimeTextView;
         ImageView backdropPathImageView, posterImageView;
 
         titleTextView = view.findViewById(R.id.titleDescriptionTextView);
@@ -45,6 +45,7 @@ public class DescriptionMovieFragment extends Fragment {
         descriptionTextView = view.findViewById(R.id.descriptionDescriptionTextView);
         backdropPathImageView = view.findViewById(R.id.backdropPathDescriptionImageView);
         posterImageView = view.findViewById(R.id.posterDescriptionImageView);
+        runtimeTextView = view.findViewById(R.id.runtimeDescriptionTextView);
 
         NetworkService.getInstance().getAPIService().getDescriptionWithId(id, "fd81cebf8e9f74660ab0ba29bfce449f", "en-US")
                 .enqueue(new Callback<Description>() {
@@ -53,10 +54,17 @@ public class DescriptionMovieFragment extends Fragment {
 
                         Description description = response.body();
 
-                       titleTextView.setText(description.getTitle());
-                    ratingTextView.setText(description.getVoteAverage());
-                        yearTextView.setText(description.getReleaseDate());
-                       descriptionTextView.setText(description.getOverview());
+                        int runtime = description.getRuntime();
+
+                        int hours = runtime / 60;
+
+                        int minutes = runtime % 60;
+
+                        titleTextView.setText(description.getTitle());
+                        ratingTextView.setText(description.getVoteAverage());
+                        yearTextView.setText(description.getReleaseDate().substring(0, 4));
+                        descriptionTextView.setText(description.getOverview());
+                        runtimeTextView.setText(Integer.toString(hours) + " hr " + Integer.toString(minutes) + " min");
                         Picasso.get().load("https://image.tmdb.org/t/p/original" + description.getBackdropPath()).into(backdropPathImageView);
                         Picasso.get().load("https://image.tmdb.org/t/p/w500" + description.getPosterPath()).into(posterImageView);
 

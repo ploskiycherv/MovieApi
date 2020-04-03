@@ -50,7 +50,7 @@ public class Description {
     private Integer revenue;
     @SerializedName("runtime")
     @Expose
-    private Integer runtime;
+    private int runtime;
     @SerializedName("status")
     @Expose
     private String status;
@@ -183,11 +183,11 @@ public class Description {
         this.revenue = revenue;
     }
 
-    public Integer getRuntime() {
+    public int getRuntime() {
         return runtime;
     }
 
-    public void setRuntime(Integer runtime) {
+    public void setRuntime(int runtime) {
         this.runtime = runtime;
     }
 
