@@ -2,7 +2,10 @@ package com.example.movieapi.view;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +18,14 @@ import com.example.movieapi.api.Description;
 import com.example.movieapi.api.MovieList;
 import com.example.movieapi.api.NetworkService;
 import com.example.movieapi.api.Result;
+import com.example.movieapi.data.MovieModel;
+import com.example.movieapi.data.MovieRepo;
 import com.example.movieapi.data.MovieRepoImpl;
 import com.example.movieapi.model.MovieDescription;
 import com.example.movieapi.model.MovieItem;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +41,8 @@ public class DescriptionMovieFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
 
+        MovieRepo movieRepo = new MovieRepoImpl();
+
         String id = bundle.getString("ID");
 
         TextView ratingTextView, titleTextView, yearTextView, descriptionTextView, runtimeTextView;
@@ -47,34 +56,21 @@ public class DescriptionMovieFragment extends Fragment {
         posterImageView = view.findViewById(R.id.posterDescriptionImageView);
         runtimeTextView = view.findViewById(R.id.runtimeDescriptionTextView);
 
-        NetworkService.getInstance().getAPIService().getDescriptionWithId(id, "fd81cebf8e9f74660ab0ba29bfce449f", "en-US")
-                .enqueue(new Callback<Description>() {
-                    @Override
-                    public void onResponse(Call<Description> call, Response<Description> response) {
+        final MovieModel viewModel = new ViewModelProvider(this).get(MovieModel.class);
+        viewModel.descriptionLiveData().observe(getViewLifecycleOwner(), new Observer<List<MovieDescription>>() {
+            @Override
+            public void onChanged(@Nullable List<MovieDescription> data) {
+                titleTextView.setText(data.get(0).getTitle());
+                ratingTextView.setText(data.get(0).getRating());
+                yearTextView.setText(data.get(0).getYear());
+                descriptionTextView.setText(data.get(0).getDescription());
+                runtimeTextView.setText(data.get(0).getRuntime());
+                Picasso.get().load("https://image.tmdb.org/t/p/w500" + data.get(0).getPosterUrl()).into(posterImageView);
+                Picasso.get().load("https://image.tmdb.org/t/p/original" + data.get(0).getBackdropPathUrl()).into(backdropPathImageView);
+            }
+        });
 
-                        Description description = response.body();
-
-                        int runtime = description.getRuntime();
-
-                        int hours = runtime / 60;
-
-                        int minutes = runtime % 60;
-
-                        titleTextView.setText(description.getTitle());
-                        ratingTextView.setText(description.getVoteAverage());
-                        yearTextView.setText(description.getReleaseDate().substring(0, 4));
-                        descriptionTextView.setText(description.getOverview());
-                        runtimeTextView.setText(Integer.toString(hours) + " hr " + Integer.toString(minutes) + " min");
-                        Picasso.get().load("https://image.tmdb.org/t/p/original" + description.getBackdropPath()).into(backdropPathImageView);
-                        Picasso.get().load("https://image.tmdb.org/t/p/w500" + description.getPosterPath()).into(posterImageView);
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<Description> call, Throwable t) {
-
-                    }
-                });
+        viewModel.getDescriptions(id);
 
         return view;
     }

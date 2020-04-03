@@ -1,13 +1,18 @@
 package com.example.movieapi.data;
 
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.movieapi.R;
+import com.example.movieapi.api.Description;
 import com.example.movieapi.api.MovieList;
 import com.example.movieapi.api.Result;
+import com.example.movieapi.model.MovieDescription;
 import com.example.movieapi.model.MovieItem;
 
 import java.util.ArrayList;
@@ -39,6 +44,11 @@ public class MovieModel extends ViewModel {
         return thirdMovieItemLiveData;
     }
 
+    private MutableLiveData<List<MovieDescription>> descriptionLiveData = new MutableLiveData<>();
+
+    public LiveData<List<MovieDescription>> descriptionLiveData() {
+        return descriptionLiveData;
+    }
 
     public void getMovies(String firstSorting, String secondSorting, String thirdSorting) {
 
@@ -46,6 +56,38 @@ public class MovieModel extends ViewModel {
         getListMovie(secondSorting, secondMovieItemLiveData);
         getListMovie(thirdSorting, thirdMovieItemLiveData);
 
+    }
+
+    public void getDescriptions(String id) {
+        getDescription(id);
+    }
+
+    private void getDescription(String id) {
+        movieRepo.getDescriptionWithId(id)
+                .enqueue(new Callback<Description>() {
+                    @Override
+                    public void onResponse(Call<Description> call, Response<Description> response) {
+
+                        Description description = response.body();
+
+                        int runtime = description.getRuntime();
+
+                        int hours = runtime / 60;
+
+                        int minutes = runtime % 60;
+
+                        String time = Integer.toString(hours) + " hr " + Integer.toString(minutes) + " min";
+
+                        List<MovieDescription> movieDescriptions = new ArrayList<>();
+                        movieDescriptions.add(new MovieDescription(description.getTitle(), description.getReleaseDate().substring(0, 4), description.getVoteAverage(), description.getPosterPath(), description.getBackdropPath(), description.getId().toString(), description.getOverview(), time));
+                        descriptionLiveData.setValue(movieDescriptions);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Description> call, Throwable t) {
+
+                    }
+                });
     }
 
     private void getListMovie(String firstSorting, MutableLiveData<List<MovieItem>> movieItemLiveData) {

@@ -70,4 +70,12 @@ public class MovieDescription {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(String runtime) {
+        this.runtime = runtime;
+    }
 }

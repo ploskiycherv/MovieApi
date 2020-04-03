@@ -71,7 +71,6 @@ public class MainMovieListFragment extends Fragment {
         thirdRecyclerView.setLayoutManager(thirdLinearLayoutManager);
 
         final MovieModel viewModel = new ViewModelProvider(this).get(MovieModel.class);
-
         viewModel.firstMovieItemLiveData().observe(getViewLifecycleOwner(), new Observer<List<MovieItem>>() {
             @Override
             public void onChanged(@Nullable List<MovieItem> data) {
