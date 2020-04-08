@@ -21,32 +21,23 @@ class MainMovieListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        val view = inflater.inflate(R.layout.fragment_main_movie_list, null)
+        val view = inflater.inflate(R.layout.fragment_main_movie_list, container, false)
 
-        var firstRecyclerView: RecyclerView
-        var secondRecyclerView: RecyclerView
-        var thirdRecyclerView: RecyclerView
-        var firstSorting: String
-        var secondSorting: String
-        var thirdSorting: String
-        var firstTextView: TextView
-        var secondTextView: TextView
-        var thirdTextView: TextView
+        val firstRecyclerView = view.findViewById<RecyclerView>(R.id.firstRecyclerView)
+        val secondRecyclerView = view.findViewById<RecyclerView>(R.id.secondRecyclerView)
+        val thirdRecyclerView = view.findViewById<RecyclerView>(R.id.thirdRecyclerView)
 
-        firstRecyclerView = view.findViewById(R.id.firstRecyclerView)
-        secondRecyclerView = view.findViewById(R.id.secondRecyclerView)
-        thirdRecyclerView = view.findViewById(R.id.thirdRecyclerView)
-        firstTextView = view.findViewById(R.id.firstTextView)
-        secondTextView = view.findViewById(R.id.secondTextView)
-        thirdTextView = view.findViewById(R.id.thirdTextView)
+        val firstTextView = view.findViewById<TextView>(R.id.firstTextView)
+        val secondTextView = view.findViewById<TextView>(R.id.secondTextView)
+        val thirdTextView = view.findViewById<TextView>(R.id.thirdTextView)
 
-        firstSorting = "popular"
-        secondSorting = "top_rated"
-        thirdSorting = "now_playing"
+        val firstSorting = "popular"
+        val secondSorting = "top_rated"
+        val thirdSorting = "now_playing"
 
-        firstTextView.setText(firstSorting!!.replace("_", " "))
-        secondTextView.setText(secondSorting!!.replace("_", " "))
-        thirdTextView.setText(thirdSorting!!.replace("_", " "))
+        firstTextView.text = firstSorting.replace("_", " ")
+        secondTextView.text = secondSorting.replace("_", " ")
+        thirdTextView.text = thirdSorting.replace("_", " ")
 
         val firstMovieItemAdapter = MovieItemAdapter(MovieItemDiffUtil(), onClickListener)
         val secondMovieItemAdapter = MovieItemAdapter(MovieItemDiffUtil(), onClickListener)
@@ -56,13 +47,13 @@ class MainMovieListFragment : Fragment() {
         val secondLinearLayoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         val thirdLinearLayoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 
-        firstRecyclerView.setAdapter(firstMovieItemAdapter)
-        secondRecyclerView.setAdapter(secondMovieItemAdapter)
-        thirdRecyclerView.setAdapter(thirdMovieItemAdapter)
+        firstRecyclerView.adapter = firstMovieItemAdapter
+        secondRecyclerView.adapter = secondMovieItemAdapter
+        thirdRecyclerView.adapter = thirdMovieItemAdapter
 
-        firstRecyclerView.setLayoutManager(firstLinearLayoutManager)
-        secondRecyclerView.setLayoutManager(secondLinearLayoutManager)
-        thirdRecyclerView.setLayoutManager(thirdLinearLayoutManager)
+        firstRecyclerView.layoutManager = firstLinearLayoutManager
+        secondRecyclerView.layoutManager = secondLinearLayoutManager
+        thirdRecyclerView.layoutManager = thirdLinearLayoutManager
 
         val viewModel = ViewModelProvider(this).get(MovieModel::class.java)
 
@@ -75,7 +66,7 @@ class MainMovieListFragment : Fragment() {
         return view
     }
 
-    var onClickListener = object : OnItemClick {
+    private var onClickListener = object : OnItemClick {
         override fun onClick(id: String?) {
             val bundle = Bundle()
             bundle.putString("ID", id)
