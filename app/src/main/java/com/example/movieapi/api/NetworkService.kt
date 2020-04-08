@@ -5,7 +5,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class NetworkService private constructor() {
     private val BASE_URL = "https://api.themoviedb.org"
+
     private val retrofit: Retrofit
+
     val aPIService: APIService
         get() = retrofit.create(APIService::class.java)
 
