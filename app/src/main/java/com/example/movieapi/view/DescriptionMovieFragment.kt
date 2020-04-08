@@ -11,8 +11,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.movieapi.R
 import com.example.movieapi.data.MovieModel
-import com.example.movieapi.data.MovieRepo
-import com.example.movieapi.data.MovieRepoImpl
 import com.squareup.picasso.Picasso
 
 class DescriptionMovieFragment : Fragment() {
@@ -23,31 +21,21 @@ class DescriptionMovieFragment : Fragment() {
 
         val bundle = this.arguments
 
-        val movieRepo: MovieRepo = MovieRepoImpl()
-
         val id = bundle!!.getString("ID")
 
-        val ratingTextView: TextView
-        val titleTextView: TextView
-        val yearTextView: TextView
-        val descriptionTextView: TextView
-        val runtimeTextView: TextView
-        val backdropPathImageView: ImageView
-        val posterImageView: ImageView
-
-        titleTextView = view.findViewById(R.id.titleDescriptionTextView)
-        ratingTextView = view.findViewById(R.id.ratingDescriptionTextView)
-        yearTextView = view.findViewById(R.id.yearDescriptionTextView)
-        descriptionTextView = view.findViewById(R.id.descriptionDescriptionTextView)
-        backdropPathImageView = view.findViewById(R.id.backdropPathDescriptionImageView)
-        posterImageView = view.findViewById(R.id.posterDescriptionImageView)
-        runtimeTextView = view.findViewById(R.id.runtimeDescriptionTextView)
+        val titleTextView = view.findViewById<TextView>(R.id.titleDescriptionTextView)
+        val ratingTextView = view.findViewById<TextView>(R.id.ratingDescriptionTextView)
+        val yearTextView = view.findViewById<TextView>(R.id.yearDescriptionTextView)
+        val descriptionTextView = view.findViewById<TextView>(R.id.descriptionDescriptionTextView)
+        val backdropPathImageView = view.findViewById<ImageView>(R.id.backdropPathDescriptionImageView)
+        val posterImageView = view.findViewById<ImageView>(R.id.posterDescriptionImageView)
+        val runtimeTextView = view.findViewById<TextView>(R.id.runtimeDescriptionTextView)
 
         val viewModel = ViewModelProvider(this).get(MovieModel::class.java)
 
         viewModel.descriptionLiveData().observe(viewLifecycleOwner, Observer { data ->
 
-            titleTextView.text = data!![0].title
+            titleTextView.text = data[0].title
             ratingTextView.text = data[0].rating
             yearTextView.text = data[0].year
             descriptionTextView.text = data[0].description

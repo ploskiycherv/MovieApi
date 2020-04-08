@@ -14,6 +14,7 @@ import java.util.*
 
 class MovieModel : ViewModel() {
     private val movieRepo: MovieRepo = MovieRepoImpl()
+
     private val firstMovieItemLiveData = MutableLiveData<List<MovieItem>>()
     fun firstMovieItemLiveData(): LiveData<List<MovieItem>> {
         return firstMovieItemLiveData
@@ -52,7 +53,7 @@ class MovieModel : ViewModel() {
                         val runtime = description!!.runtime
                         val hours = runtime / 60
                         val minutes = runtime % 60
-                        val time = Integer.toString(hours) + " hr " + Integer.toString(minutes) + " min"
+                        val time = "$hours hr $minutes min"
                         val movieDescriptions: MutableList<MovieDescription> = ArrayList()
                         movieDescriptions.add(MovieDescription(description.title!!, description.releaseDate!!.substring(0, 4), description.voteAverage!!, description.posterPath!!, description.backdropPath!!, description.id.toString(), description.overview!!, time))
                         descriptionLiveData.value = movieDescriptions
