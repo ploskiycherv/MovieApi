@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/itemCardView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -15,6 +16,7 @@
         <ImageView
             android:id="@+id/posterImageView"
             android:layout_width="100dp"
+            tools:ignore="ContentDescription"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +29,7 @@
             android:background="@drawable/rounded_corner"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:textSize="10sp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,7 +42,7 @@
             android:minLines="2"
             android:padding="4dp"
             android:textColor="@color/colorText"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/posterImageView" />
@@ -53,7 +55,7 @@
             android:minLines="1"
             android:padding="4dp"
             android:textColor="@color/colorText"
-            android:textSize="8sp"
+            android:textSize="12sp"
             android:textStyle="italic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/titleTextView" />

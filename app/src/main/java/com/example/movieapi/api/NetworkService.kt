@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class NetworkService private constructor() {
-    private val BASE_URL = "https://api.themoviedb.org"
+    private val baseUrl = "https://api.themoviedb.org"
 
     private val retrofit: Retrofit
 
@@ -24,7 +24,7 @@ class NetworkService private constructor() {
 
     init {
         retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
     }

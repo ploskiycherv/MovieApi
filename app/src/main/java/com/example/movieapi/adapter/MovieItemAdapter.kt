@@ -10,12 +10,16 @@ import com.example.movieapi.model.MovieItem
 import com.squareup.picasso.Picasso
 
 class MovieItemAdapter(diffCallback: DiffUtil.ItemCallback<MovieItem>, var onClickListener: OnItemClick) : ListAdapter<MovieItem, MovieItemViewHolder>(diffCallback) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieItemViewHolder {
+
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
+
         return MovieItemViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MovieItemViewHolder, position: Int) {
+
         val movieItem = getItem(position)
         holder.titleTextView.text = movieItem!!.title
         holder.yearTextView.text = movieItem.year
