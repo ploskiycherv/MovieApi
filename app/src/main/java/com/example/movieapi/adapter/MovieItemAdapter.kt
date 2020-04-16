@@ -8,25 +8,33 @@ import com.example.movieapi.R
 import com.example.movieapi.data.OnItemClick
 import com.example.movieapi.model.MovieItem
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.movie_item.view.*
 
-class MovieItemAdapter(diffCallback: DiffUtil.ItemCallback<MovieItem>, var onClickListener: OnItemClick) : ListAdapter<MovieItem, MovieItemViewHolder>(diffCallback) {
+class MovieItemAdapter(
+        diffCallback: DiffUtil.ItemCallback<MovieItem>,
+        private val onClickListener: OnItemClick
+) : ListAdapter<MovieItem, MovieItemViewHolder>(diffCallback) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieItemViewHolder {
-
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
-
-        return MovieItemViewHolder(itemView)
+    companion object {
+        private const val BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"
     }
 
-    override fun onBindViewHolder(holder: MovieItemViewHolder, position: Int) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieItemViewHolder =
+            MovieItemViewHolder(
+                    LayoutInflater.from(parent.context)
+                            .inflate(R.layout.movie_item, parent, false))
 
-        val movieItem = getItem(position)
-        holder.titleTextView.text = movieItem!!.title
-        holder.yearTextView.text = movieItem.year
-        holder.ratingTextView.text = movieItem.rating
-        val posterUrl = "https://image.tmdb.org/t/p/w500" + movieItem.posterUrl
-        Picasso.get().load(posterUrl).into(holder.posterImageView)
-        holder.itemCardView.setOnClickListener { onClickListener.onClick(movieItem.id) }
+    override fun onBindViewHolder(holder: MovieItemViewHolder, position: Int) {
+        with(holder.itemView) {
+            getItem(position)?.let { item ->
+                titleTextView.text = item.title
+                yearTextView.text = item.year
+                ratingTextView.text = item.rating
+                val posterUrl: String = BASE_IMAGE_URL + item.posterUrl
+                Picasso.get().load(posterUrl).into(posterImageView)
+                itemCardView.setOnClickListener { onClickListener.onClick(item.id) }
+            }
+        }
     }
 
 }

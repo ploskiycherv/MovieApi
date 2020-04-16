@@ -1,3 +1,9 @@
 package com.example.movieapi.model
 
-class MovieItem(var title: String, var year: String, var rating: String, var posterUrl: String, var id: String)
+data class MovieItem(
+        val title: String,
+        val year: String,
+        val rating: String,
+        val posterUrl: String,
+        val id: String
+)
