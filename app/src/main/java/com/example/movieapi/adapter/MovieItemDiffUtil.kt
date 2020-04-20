@@ -9,5 +9,5 @@ class MovieItemDiffUtil : DiffUtil.ItemCallback<MovieItem>() {
             oldItem == newItem
 
     override fun areContentsTheSame(oldItem: MovieItem, newItem: MovieItem): Boolean =
-            false
+            true
 }

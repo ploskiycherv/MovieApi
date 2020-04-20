@@ -13,18 +13,18 @@ import kotlinx.android.synthetic.main.movie_item.view.*
 class MovieItemAdapter(
         diffCallback: DiffUtil.ItemCallback<MovieItem>,
         private val onClickListener: OnItemClick
-) : ListAdapter<MovieItem, MovieItemViewHolder>(diffCallback) {
+) : ListAdapter<MovieItem, MovieViewHolder>(diffCallback) {
 
     companion object {
         private const val BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieItemViewHolder =
-            MovieItemViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
+            MovieViewHolder(
                     LayoutInflater.from(parent.context)
                             .inflate(R.layout.movie_item, parent, false))
 
-    override fun onBindViewHolder(holder: MovieItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         with(holder.itemView) {
             getItem(position)?.let { item ->
                 titleTextView.text = item.title

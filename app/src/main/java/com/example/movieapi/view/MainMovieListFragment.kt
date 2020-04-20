@@ -6,15 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.movieapi.R
 import com.example.movieapi.adapter.MovieItemAdapter
 import com.example.movieapi.adapter.MovieItemDiffUtil
 import com.example.movieapi.data.MovieModel
+import com.example.movieapi.data.MovieRepo
 import com.example.movieapi.data.OnItemClick
 import kotlinx.android.synthetic.main.fragment_main_movie_list.*
+import org.koin.android.ext.android.inject
 
 class MainMovieListFragment : Fragment() {
+
+    private val viewModel: MovieModel by inject()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -40,8 +43,6 @@ class MainMovieListFragment : Fragment() {
         firstRecyclerView.adapter = firstMovieItemAdapter
         secondRecyclerView.adapter = secondMovieItemAdapter
         thirdRecyclerView.adapter = thirdMovieItemAdapter
-
-        val viewModel: MovieModel = ViewModelProvider(this).get(MovieModel::class.java)
 
         with(viewModel) {
             firstMovieItemLiveData().observe(viewLifecycleOwner, Observer { data ->

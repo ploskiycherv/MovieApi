@@ -11,8 +11,11 @@ import com.example.movieapi.R
 import com.example.movieapi.data.MovieModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_description_movie.*
+import org.koin.android.ext.android.inject
 
 class DescriptionMovieFragment : Fragment() {
+
+    private val viewModel: MovieModel by inject()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -26,8 +29,6 @@ class DescriptionMovieFragment : Fragment() {
         val bundle = this.arguments
 
         val id = bundle!!.getString("ID")
-
-        val viewModel = ViewModelProvider(this).get(MovieModel::class.java)
 
         viewModel.descriptionLiveData().observe(viewLifecycleOwner, Observer { data ->
 

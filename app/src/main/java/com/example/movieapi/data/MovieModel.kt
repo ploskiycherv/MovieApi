@@ -10,15 +10,16 @@ import com.example.movieapi.model.MovieItem
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 import java.util.*
 
-class MovieModel : ViewModel() {
+class MovieModel(
+        private val repo: MovieRepo
+) : ViewModel() {
 
     private val firstSorting = "popular"
     private val secondSorting = "top_rated"
     private val thirdSorting = "now_playing"
-
-    private val movieRepo: MovieRepo = MovieRepoImpl()
 
     private val firstMovieItemLiveData = MutableLiveData<List<MovieItem>>()
     fun firstMovieItemLiveData(): LiveData<List<MovieItem>> {
@@ -36,30 +37,26 @@ class MovieModel : ViewModel() {
     }
 
     fun getMovies() {
+        Timber.d("Вызов функции полученмя фильмов")
         getListMovie(firstSorting, firstMovieItemLiveData)
         getListMovie(secondSorting, secondMovieItemLiveData)
         getListMovie(thirdSorting, thirdMovieItemLiveData)
     }
 
     private fun getListMovie(firstSorting: String, movieItemLiveData: MutableLiveData<List<MovieItem>>) {
-        movieRepo.getMovieWithId(firstSorting)
-                ?.enqueue(object : Callback<MovieList?> {
+        Timber.d("Сортинг: $firstSorting")
+        repo.getMovieWithId(firstSorting)
+                .enqueue(object : Callback<MovieList?> {
                     override fun onResponse(call: Call<MovieList?>, response: Response<MovieList?>) {
 
-                        val movieList = response.body()
-
-                        val movieItems: MutableList<MovieItem> = ArrayList()
-
-                        for (i in movieList!!.results!!.indices) {
-                            val result = movieList.results!![i]
-                            movieItems.add(MovieItem(result.title!!,
-                                    result.releaseDate!!,
-                                    result.voteAverage!!,
-                                    result.posterPath!!,
-                                    result.id!!))
-                        }
-
-                        movieItemLiveData.value = movieItems
+                        movieItemLiveData.value = response.body()!!.results!!
+                                .map {
+                                    MovieItem(it.title!!,
+                                            it.releaseDate!!,
+                                            it.voteAverage!!,
+                                            it.posterPath!!,
+                                            it.id!!)
+                                }
 
                     }
 
@@ -77,8 +74,8 @@ class MovieModel : ViewModel() {
     }
 
     private fun getDescription(id: String) {
-        movieRepo.getDescriptionWithId(id)
-                ?.enqueue(object : Callback<Description?> {
+        repo.getDescriptionWithId(id)
+                .enqueue(object : Callback<Description?> {
                     override fun onResponse(call: Call<Description?>, response: Response<Description?>) {
 
                         val description = response.body()

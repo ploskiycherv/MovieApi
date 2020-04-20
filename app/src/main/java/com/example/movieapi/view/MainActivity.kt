@@ -16,3 +16,11 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 }
+
+// koin
+// private val viewModel: MovieModel by inject()
+// Жизненный цикл Application
+// Усовершенствование Kotlin
+// map let apply with when
+
+//rx
