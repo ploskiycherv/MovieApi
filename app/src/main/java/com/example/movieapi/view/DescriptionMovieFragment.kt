@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.movieapi.R
+import com.example.movieapi.data.DescriptionModel
 import com.example.movieapi.data.MovieModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_description_movie.*
@@ -15,7 +16,7 @@ import org.koin.android.ext.android.inject
 
 class DescriptionMovieFragment : Fragment() {
 
-    private val viewModel: MovieModel by inject()
+    private val viewModel: DescriptionModel by inject()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -43,7 +44,7 @@ class DescriptionMovieFragment : Fragment() {
         })
 
         if (id != null) {
-            viewModel.getDescriptions(id)
+            viewModel.getDescription(id)
         }
     }
 }

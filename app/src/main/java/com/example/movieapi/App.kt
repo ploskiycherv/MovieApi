@@ -2,6 +2,7 @@ package com.example.movieapi
 
 import android.app.Application
 import com.example.movieapi.api.Api
+import com.example.movieapi.data.DescriptionModel
 import com.example.movieapi.data.MovieModel
 import com.example.movieapi.data.MovieRepo
 import com.example.movieapi.data.MovieRepoImpl
@@ -52,7 +53,9 @@ class App : Application() {
 
             single<MovieRepo> {
                 MovieRepoImpl(get()) }
+
             viewModel { MovieModel(get()) }
+            viewModel { DescriptionModel(get()) }
         }
         startKoin {
             androidContext(this@App)
