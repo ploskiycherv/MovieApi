@@ -63,38 +63,4 @@ class MovieModel(
                     override fun onFailure(call: Call<MovieList?>, t: Throwable) {}
                 })
     }
-
-//    private val descriptionLiveData = MutableLiveData<List<MovieDescription>>()
-//    fun descriptionLiveData(): LiveData<List<MovieDescription>> {
-//        return descriptionLiveData
-//    }
-//
-//    fun getDescriptions(id: String) {
-//        getDescription(id)
-//    }
-//
-//    private fun getDescription(id: String) {
-//        repo.getDescriptionWithId(id)
-//                .enqueue(object : Callback<Description?> {
-//                    override fun onResponse(call: Call<Description?>, response: Response<Description?>) {
-//
-//                        val description = response.body()
-//
-//                        val runtime = description!!.runtime
-//
-//                        val hours = runtime / 60
-//                        val minutes = runtime % 60
-//                        val time = "$hours hr $minutes min"
-//
-//                        val movieDescriptions: MutableList<MovieDescription> = ArrayList()
-//
-//                        movieDescriptions.add(MovieDescription(description.title!!, description.releaseDate!!.substring(0, 4), description.voteAverage!!, description.posterPath!!, description.backdropPath!!, description.id.toString(), description.overview!!, time))
-//
-//                        descriptionLiveData.value = movieDescriptions
-//                    }
-//
-//                    override fun onFailure(call: Call<Description?>, t: Throwable) {}
-//                })
-//    }
-
 }

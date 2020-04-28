@@ -1,6 +1,8 @@
 package com.example.movieapi.api
 
+import io.reactivex.Single
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -19,5 +21,5 @@ interface Api {
             @Path("id") id: String?,
             @Query("api_key") apiKey: String?,
             @Query("language") language: String?
-    ): Call<Description?>
+    ): Single<Response<Description>>
 }

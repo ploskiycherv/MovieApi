@@ -14,6 +14,7 @@ import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 
@@ -42,6 +43,7 @@ class App : Application() {
             }
             single<Retrofit> {
                 Retrofit.Builder()
+                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                         .baseUrl(BASE_URL)
                         .client(get())
                         .addConverterFactory(GsonConverterFactory.create())
@@ -49,10 +51,12 @@ class App : Application() {
             }
             single<Api> {
                 get<Retrofit>()
-                        .create(Api::class.java) }
+                        .create(Api::class.java)
+            }
 
             single<MovieRepo> {
-                MovieRepoImpl(get()) }
+                MovieRepoImpl(get())
+            }
 
             viewModel { MovieModel(get()) }
             viewModel { DescriptionModel(get()) }

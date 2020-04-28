@@ -31,16 +31,18 @@ class DescriptionMovieFragment : Fragment() {
 
         val id = bundle!!.getString("ID")
 
-        viewModel.descriptionLiveData().observe(viewLifecycleOwner, Observer { data ->
-
-            titleDescriptionTextView.text = data[0].title
-            ratingDescriptionTextView.text = data[0].rating
-            yearDescriptionTextView.text = data[0].year
-            descriptionDescriptionTextView.text = data[0].description
-            runtimeDescriptionTextView.text = data[0].runtime
-            Picasso.get().load("https://image.tmdb.org/t/p/w500" + data[0].posterUrl).into(posterDescriptionImageView)
-            Picasso.get().load("https://image.tmdb.org/t/p/original" + data[0].backdropPathUrl).into(backdropPathDescriptionImageView)
-
+        viewModel.descriptionLiveData().observe(viewLifecycleOwner, Observer { movieDescription ->
+            with(movieDescription) {
+                titleDescriptionTextView.text = title
+                ratingDescriptionTextView.text = rating
+                yearDescriptionTextView.text = year
+                descriptionDescriptionTextView.text = description
+                runtimeDescriptionTextView.text = runtime
+                Picasso.get().load("https://image.tmdb.org/t/p/w500$posterUrl")
+                        .into(posterDescriptionImageView)
+                Picasso.get().load("https://image.tmdb.org/t/p/original$backdropPathUrl")
+                        .into(backdropPathDescriptionImageView)
+            }
         })
 
         if (id != null) {
