@@ -14,7 +14,7 @@ interface Api {
             @Query("api_key") apiKey: String?,
             @Query("language") language: String?,
             @Query("page") page: Int
-    ): Call<MovieList?>
+    ): Single<Response<MovieList>>
 
     @GET("/3/movie/{id}")
     fun getDescriptionWithId(

@@ -1,6 +1,6 @@
 package com.example.movieapi.model
 
-class MovieDescription(val title: String,
+data class MovieDescription(val title: String,
                        val year: String,
                        val rating: String,
                        val posterUrl: String,

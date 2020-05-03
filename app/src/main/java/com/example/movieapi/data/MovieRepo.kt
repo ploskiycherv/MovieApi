@@ -8,7 +8,7 @@ import retrofit2.Call
 interface MovieRepo {
     fun getMovieWithId(
             sorting: String?
-    ): Call<MovieList?>
+    ): Single<MovieList>
 
     fun getDescriptionWithId(
             id: String?

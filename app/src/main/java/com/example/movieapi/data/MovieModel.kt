@@ -3,19 +3,17 @@ package com.example.movieapi.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieapi.api.Description
-import com.example.movieapi.api.MovieList
-import com.example.movieapi.model.MovieDescription
 import com.example.movieapi.model.MovieItem
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
-import java.util.*
 
 class MovieModel(
         private val repo: MovieRepo
 ) : ViewModel() {
+
+    private var disposableMovie: Disposable? = null
 
     private val firstSorting = "popular"
     private val secondSorting = "top_rated"
@@ -44,23 +42,22 @@ class MovieModel(
     }
 
     private fun getListMovie(firstSorting: String, movieItemLiveData: MutableLiveData<List<MovieItem>>) {
-        Timber.d("Сортинг: $firstSorting")
-        repo.getMovieWithId(firstSorting)
-                .enqueue(object : Callback<MovieList?> {
-                    override fun onResponse(call: Call<MovieList?>, response: Response<MovieList?>) {
-
-                        movieItemLiveData.value = response.body()!!.results!!
-                                .map {
-                                    MovieItem(it.title!!,
-                                            it.releaseDate!!,
-                                            it.voteAverage!!,
-                                            it.posterPath!!,
-                                            it.id!!)
-                                }
-
+        disposableMovie = repo.getMovieWithId(firstSorting)
+                .subscribeOn(Schedulers.io())
+                .map {
+                    it.results!!.map { result ->
+                        MovieItem(result.title!!,
+                                result.releaseDate!!,
+                                result.voteAverage!!,
+                                result.posterPath!!,
+                                result.id!!)
                     }
+                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    movieItemLiveData.value = it
+                }, {
 
-                    override fun onFailure(call: Call<MovieList?>, t: Throwable) {}
                 })
     }
 }
