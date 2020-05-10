@@ -60,4 +60,7 @@ class MovieModel(
 
                 })
     }
+    override fun onCleared() {
+        disposableMovie?.dispose()
+    }
 }

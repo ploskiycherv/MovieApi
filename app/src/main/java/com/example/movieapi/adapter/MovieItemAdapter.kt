@@ -27,7 +27,7 @@ class MovieItemAdapter(
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         with(holder.itemView) {
             getItem(position)?.let { item ->
-                titleTextView.text = item.title
+                titleTextView.text = item.title         //  holder.itemView.titleTextView.text = getItem(position).title
                 yearTextView.text = item.year
                 ratingTextView.text = item.rating
                 val posterUrl: String = BASE_IMAGE_URL + item.posterUrl
