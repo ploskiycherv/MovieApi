@@ -1,7 +1,8 @@
-package com.example.movieapi.api
+package com.example.movieapi.data.api
 
+import com.example.movieapi.data.dto.DescriptionResp
+import com.example.movieapi.data.dto.MovieListResp
 import io.reactivex.Single
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -14,12 +15,12 @@ interface Api {
             @Query("api_key") apiKey: String?,
             @Query("language") language: String?,
             @Query("page") page: Int
-    ): Single<Response<MovieList>>
+    ): Single<Response<MovieListResp>>
 
     @GET("/3/movie/{id}")
     fun getDescriptionWithId(
             @Path("id") id: String?,
             @Query("api_key") apiKey: String?,
             @Query("language") language: String?
-    ): Single<Response<Description>>
+    ): Single<Response<DescriptionResp>>
 }

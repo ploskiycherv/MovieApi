@@ -1,11 +1,13 @@
 package com.example.movieapi
 
 import android.app.Application
-import com.example.movieapi.api.Api
-import com.example.movieapi.data.DescriptionModel
-import com.example.movieapi.data.MovieModel
-import com.example.movieapi.data.MovieRepo
-import com.example.movieapi.data.MovieRepoImpl
+import com.example.movieapi.data.api.Api
+import com.example.movieapi.presentation.description.DescriptionModel
+import com.example.movieapi.presentation.list.MovieModel
+import com.example.movieapi.domain.repo.MovieRepo
+import com.example.movieapi.data.repo.MovieRepoImpl
+import com.example.movieapi.domain.interactor.MovieInteractor
+import com.example.movieapi.domain.interactor.MovieInteractorImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -56,6 +58,10 @@ class App : Application() {
 
             single<MovieRepo> {
                 MovieRepoImpl(get())
+            }
+
+            single<MovieInteractor> {
+                MovieInteractorImpl(get())
             }
 
             viewModel { MovieModel(get()) }

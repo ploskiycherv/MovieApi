@@ -1,9 +1,10 @@
-package com.example.movieapi.data
+package com.example.movieapi.presentation.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieapi.model.MovieItem
+import com.example.movieapi.domain.repo.MovieRepo
+import com.example.movieapi.presentation.list.item.MovieItem
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -45,7 +46,7 @@ class MovieModel(
         disposableMovie = repo.getMovieWithId(firstSorting)
                 .subscribeOn(Schedulers.io())
                 .map {
-                    it.results!!.map { result ->
+                    it.movieDtos!!.map { result ->
                         MovieItem(result.title!!,
                                 result.releaseDate!!,
                                 result.voteAverage!!,

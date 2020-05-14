@@ -1,22 +1,22 @@
-package com.example.movieapi.data
+package com.example.movieapi.presentation.description
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieapi.model.MovieDescription
+import com.example.movieapi.domain.interactor.MovieInteractor
+import com.example.movieapi.presentation.description.item.MovieDescriptionUiItem
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import java.util.*
 
 class DescriptionModel(
-        private val repo: MovieRepo
+        private val interactor: MovieInteractor
 ) : ViewModel() {
 
     private var disposableDescription: Disposable? = null
 
-    private val descriptionLiveData = MutableLiveData<MovieDescription>()
-    fun descriptionLiveData(): LiveData<MovieDescription> {
+    private val descriptionLiveData = MutableLiveData<MovieDescriptionUiItem>()
+    fun descriptionLiveData(): LiveData<MovieDescriptionUiItem> {
         return descriptionLiveData
     }
 
@@ -25,15 +25,22 @@ class DescriptionModel(
     }
 
     private fun getListDescription(id: String) {
-        disposableDescription = repo.getDescriptionWithId(id)
-                .subscribeOn(Schedulers.io())
+        disposableDescription = interactor.getDescription(id)
                 .map {
                     val runtime = it.runtime
                     val hours = runtime / 60
                     val minutes = runtime % 60
                     val time = "$hours hr $minutes min"
-                    MovieDescription(it.title!!, it.releaseDate!!.substring(0, 4), it.voteAverage!!, it.posterPath!!, it.backdropPath!!, it.id.toString(), it.overview!!, time)
+                    MovieDescriptionUiItem(it.title,
+                            it.releaseDate.substring(0, 4),
+                            it.voteAverage,
+                            it.posterPath,
+                            it.backdropPath,
+                            it.id,
+                            it.overview,
+                            time)
                 }
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     descriptionLiveData.value = it

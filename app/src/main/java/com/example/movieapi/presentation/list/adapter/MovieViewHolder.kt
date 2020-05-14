@@ -1,4 +1,4 @@
-package com.example.movieapi.adapter
+package com.example.movieapi.presentation.list.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView.ViewHolder

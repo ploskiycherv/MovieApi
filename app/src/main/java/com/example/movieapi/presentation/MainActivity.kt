@@ -1,8 +1,9 @@
-package com.example.movieapi.view
+package com.example.movieapi.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.movieapi.R
+import com.example.movieapi.presentation.list.MainMovieListFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

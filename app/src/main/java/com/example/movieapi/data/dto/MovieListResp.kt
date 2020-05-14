@@ -1,9 +1,9 @@
-package com.example.movieapi.api
+package com.example.movieapi.data.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class MovieList(
-        @SerializedName("results") val results: List<Result>?,
+data class MovieListResp(
+        @SerializedName("results") val movieDtos: List<MovieDto>?,
         @SerializedName("page") val page: Int,
         @SerializedName("total_results") val totalResults: Int,
         @SerializedName("total_pages") val totalPages: Int

@@ -1,4 +1,4 @@
-package com.example.movieapi.view
+package com.example.movieapi.presentation.description
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.movieapi.R
-import com.example.movieapi.data.DescriptionModel
-import com.example.movieapi.data.MovieModel
+import com.example.movieapi.presentation.description.DescriptionModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_description_movie.*
 import org.koin.android.ext.android.inject

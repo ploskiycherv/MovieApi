@@ -1,10 +1,10 @@
-package com.example.movieapi.api
+package com.example.movieapi.data.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class Description(
+data class DescriptionResp(
         @SerializedName("backdrop_path") val backdropPath: String?,
-        @SerializedName("id") val id: Int,
+        @SerializedName("id") val id: String?,
         @SerializedName("overview") val overview: String?,
         @SerializedName("poster_path") val posterPath: String?,
         @SerializedName("release_date") val releaseDate: String?,

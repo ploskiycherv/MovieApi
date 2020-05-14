@@ -1,8 +1,8 @@
-package com.example.movieapi.api
+package com.example.movieapi.data.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class MovieDto(
     @SerializedName("poster_path") val posterPath: String?,
     @SerializedName("id") val id: String?,
     @SerializedName("title") val title: String?,

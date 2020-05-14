@@ -1,4 +1,4 @@
-package com.example.movieapi.view
+package com.example.movieapi.presentation.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.movieapi.R
-import com.example.movieapi.adapter.MovieItemAdapter
-import com.example.movieapi.adapter.MovieItemDiffUtil
-import com.example.movieapi.data.MovieModel
-import com.example.movieapi.data.MovieRepo
-import com.example.movieapi.data.OnItemClick
+import com.example.movieapi.presentation.list.adapter.MovieItemAdapter
+import com.example.movieapi.presentation.list.adapter.MovieItemDiffUtil
+import com.example.movieapi.presentation.list.adapter.OnItemClick
+import com.example.movieapi.presentation.description.DescriptionMovieFragment
 import kotlinx.android.synthetic.main.fragment_main_movie_list.*
 import org.koin.android.ext.android.inject
 

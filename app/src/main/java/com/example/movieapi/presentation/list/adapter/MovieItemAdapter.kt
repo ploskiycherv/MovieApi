@@ -1,12 +1,11 @@
-package com.example.movieapi.adapter
+package com.example.movieapi.presentation.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.movieapi.R
-import com.example.movieapi.data.OnItemClick
-import com.example.movieapi.model.MovieItem
+import com.example.movieapi.presentation.list.item.MovieItem
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.movie_item.view.*
 

@@ -1,7 +1,7 @@
-package com.example.movieapi.adapter
+package com.example.movieapi.presentation.list.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.movieapi.model.MovieItem
+import com.example.movieapi.presentation.list.item.MovieItem
 
 class MovieItemDiffUtil : DiffUtil.ItemCallback<MovieItem>() {
 
